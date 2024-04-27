@@ -1,41 +1,26 @@
+import { drawRoulette } from "./roulette/roulette.js";
+
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
 
-function drawLine(degrees, radius) {
-  ctx.beginPath();
-  ctx.lineWidth = 1;
-  ctx.moveTo(0, 0);
-  let angle = (degrees * Math.PI) / 180;
-  ctx.lineTo(radius * Math.cos(angle), radius * Math.sin(angle));
-  ctx.stroke();
-}
+const $options = document.getElementById("options");
+let segments = 1;
+let options = ["default"];
 
-function drawRoulette({
-  ctx,
-  position: { x = 100, y = 100 },
-  radius = 45,
-  rotationDegree = 0,
-  segments = 2,
-}) {
-  //rotate the canvas to make the move of the roulette
-  ctx.translate(x, y);
-  ctx.rotate((rotationDegree * Math.PI) / 180);
-  //draw the circuference
-  ctx.beginPath();
-  ctx.arc(0, 0, radius, 0, 2 * Math.PI);
-  ctx.stroke();
+$options.addEventListener("input", (e) => {
+  const evaluatedOptions = e.target?.value
+    ?.split("\n")
+    ?.filter((el) => !!el)
+    ?.map((el, index) => `${index + 1}.- ${el}`);
 
-  //draw the strokes of each segment
-  const segmentAngle = Math.floor(360 / segments);
-  let angle = segmentAngle;
-  drawLine(0, radius);
-  new Array(segments - 1).fill(0).forEach(() => {
-    drawLine(angle, radius);
-    angle += segmentAngle;
-  });
+  if (evaluatedOptions.length === 0) {
+    options = ["default"];
+  } else {
+    options = evaluatedOptions;
+  }
 
-  ctx.translate(-x, -y);
-}
+  segments = options?.length;
+});
 
 let rotationDegree = 0;
 
@@ -46,7 +31,8 @@ function main() {
     position: { x: 200, y: 200 },
     radius: 170,
     rotationDegree,
-    segments: 1,
+    segments,
+    options,
   });
 
   rotationDegree += 1;
