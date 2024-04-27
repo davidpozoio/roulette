@@ -22,10 +22,12 @@ function drawRoulette({
   ctx.arc(0, 0, radius, 0, 2 * Math.PI);
   ctx.stroke();
 
-  const areaOfSegment = Math.floor(360 / segments);
-
-  drawLine(areaOfSegment, radius);
-  drawLine(areaOfSegment * 2, radius);
+  let segmentAngle = Math.floor(360 / segments);
+  drawLine(0, radius);
+  new Array(segments - 1).fill(0).forEach(() => {
+    drawLine(segmentAngle, radius);
+    segmentAngle += segmentAngle;
+  });
 
   ctx.translate(-x, -y);
 }
@@ -35,4 +37,5 @@ drawRoulette({
   position: { x: 100, y: 100 },
   radius: 40,
   rotationDegree: 0,
+  segments: 3,
 });
