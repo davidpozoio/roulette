@@ -35,6 +35,7 @@ export function drawRoulette({
   ctx.rotate((rotationDegree * Math.PI) / 180);
   //draw the circuference
   ctx.beginPath();
+  ctx.lineWidth = 2;
   ctx.arc(0, 0, radius, 0, 2 * Math.PI);
   ctx.stroke();
 
