@@ -10,6 +10,9 @@ let options = $options?.value
   ?.split("\n")
   ?.filter((el) => !!el)
   ?.map((el, index) => `${index + 1}.- ${el}`);
+if (options.length === 0) {
+  options = ["default"];
+}
 let segments = options.length;
 let rotationDegree = 0;
 let velocity = 0;
