@@ -10,4 +10,6 @@ jobs:
       - name: Echo of the message
         run: echo "Hello world"
       - run: date
+      - run: ls -l
+      - run: pwd
       - run: uname -a
