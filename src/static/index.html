@@ -5,20 +5,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <style>
-      #canvas {
-        outline: 1px solid black;
-      }
       .main {
         display: flex;
+
+        justify-content: center;
         gap: 20px;
+      }
+      .start-button {
+        width: 100px;
       }
     </style>
   </head>
   <body>
     <main class="main">
       <div>
-        <canvas id="canvas" width="400" height="400"></canvas>
-        <button id="start">Start</button>
+        <canvas
+          id="canvas"
+          width="800"
+          height="800"
+          style="width: 600px; height: 600px"
+        ></canvas>
+        <button id="start" class="start-button">Start</button>
       </div>
 
       <textarea id="options" cols="30" rows="10"></textarea>

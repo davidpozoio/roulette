@@ -6,8 +6,13 @@ const ctx = canvas.getContext("2d");
 const $options = document.getElementById("options");
 const $startButton = document.getElementById("start");
 
-let segments = 1;
-let options = ["default"];
+let options = $options?.value
+  ?.split("\n")
+  ?.filter((el) => !!el)
+  ?.map((el, index) => `${index + 1}.- ${el}`);
+let segments = options.length;
+let rotationDegree = 0;
+let velocity = 0;
 
 $options.addEventListener("input", (e) => {
   const evaluatedOptions = e.target?.value
@@ -23,9 +28,6 @@ $options.addEventListener("input", (e) => {
 
   segments = options?.length;
 });
-
-let rotationDegree = 0;
-let velocity = 0;
 
 $startButton.addEventListener("click", (e) => {
   e.target.disabled = true;
@@ -46,14 +48,17 @@ function main() {
   canvas.width = canvas.width;
   drawRoulette({
     ctx,
-    position: { x: 200, y: 200 },
-    radius: 175,
+    position: { x: 400, y: 400 },
+    radius: 175 * 2,
     rotationDegree,
     segments,
     options,
   });
 
   rotationDegree += velocity;
+  if (rotationDegree >= 360) {
+    rotationDegree = 0;
+  }
 
   requestAnimationFrame(main);
 }
