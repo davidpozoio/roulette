@@ -5,7 +5,7 @@ on:
       - master
 jobs:
   hello-world:
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-latest
     steps:
       - name: Echo of the message
         run: echo "Hello world"
