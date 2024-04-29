@@ -1,0 +1,5 @@
+#!/bin/bash
+./node_modules/.bin/esbuild ./src/server.js --minify --platform=node --bundle --outfile=dist/server.js
+./node_modules/.bin/esbuild ./src/static/main.js --minify --bundle --outfile=dist/static/main.js
+cp ./src/static/index.html ./dist/static/
+cp ./src/static/favicon.ico ./dist/static/
